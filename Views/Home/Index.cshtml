@@ -1,0 +1,113 @@
+﻿@model HotelReservation.ViewModels.ReservationViewModel
+
+@{
+    ViewData["Title"] = "Hotel Reservation";
+}
+
+<div class="form-group row">
+    <div class="col-sm-10">
+        <a asp-controller="Home" asp-action="FreeRooms">Free Rooms</a>
+    </div>
+</div>
+
+<h2>@ViewBag.Message</h2>
+
+<br />
+
+<form asp-controller="Home" asp-action="GetReservationTotal" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Name" class="form-control" placeholder="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Country" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Country" class="form-control" placeholder="Country" />
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Email" class="form-control" placeholder="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="RoomType" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="RoomType" class="custom-select mr-sm-2"
+                    asp-items="Html.GetEnumSelectList<RoomTypeEnum>()">
+                <option value="">Please Select</option>
+            </select>
+            <span asp-validation-for="RoomType" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="CheckInDate" class="col-sm-2 col-form-label"></label>
+        <div>
+            <input asp-for="CheckInDate" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}"
+                   placeholder="CheckInDate" />
+            <span asp-validation-for="CheckInDate" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="CheckOutDate" class="col-sm-2 col-form-label"></label>
+        <div>
+            <input asp-for="CheckOutDate" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}"
+                   placeholder="CheckOutDate" />
+            <span asp-validation-for="CheckOutDate" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="MealPlan" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="MealPlan" class="custom-select mr-sm-2"
+                    asp-items="Html.GetEnumSelectList<MealPlanEnum>()">
+                <option value="">Please Select</option>
+            </select>
+            <span asp-validation-for="MealPlan" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="NoOfAdults" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="NoOfAdults" class="form-control" placeholder="NoOfAdults" />
+            <span asp-validation-for="NoOfAdults" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="NoOfChildren" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="NoOfChildren" class="form-control" placeholder="NoOfChildren" />
+            <span asp-validation-for="NoOfChildren" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+    @*<div class="form-group row">
+            <label asp-for="TotalReservationCost" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="TotalReservationCost" class="form-control" placeholder="@(Model == null) ? ReservationCost : @Model.TotalReservationCost.ToString()"/>
+            </div>
+        </div>*@
+    <br />
+    @*<div class="form-group row">
+        <label asp-for="TotalReservationCost" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            @Html.DisplayFor(m => m.TotalReservationCost)
+        </div>
+    </div>*@
+
+    @if(Model != null)
+    {
+        <h2>Total Reservation Cost is @Model.TotalReservationCost.ToString()</h2>
+    }
+</form>
